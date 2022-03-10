@@ -1,7 +1,7 @@
 # GenCMakeDoc
 Generates documentation of all cmake build options for a cmake based project directly into the project's README
 
-## Inputs
+# Inputs
 
 ## `source_dir`
 
@@ -10,9 +10,11 @@ Generates documentation of all cmake build options for a cmake based project dir
 ## `option_filter`
 Specify a filter for cmake options to process. For getting options like `MYLIB_SOME_OPT`, set filter to `"MYLIB"`. If empty, no filter is applied. Default `""`.
 
-## Example usage
+# Example usage
 
+```
 uses: actions/GenCMakeDoc@v0
 with:
     source_dir: $GITHUB_WORKSPACE
     option_filter: MYPROJECT
+```
