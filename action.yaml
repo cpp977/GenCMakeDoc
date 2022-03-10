@@ -1,0 +1,58 @@
+name: 'Document CMake options'
+description: 'GitHub Actions for automatically documenting all cmake options which specify the build.'
+author: 'Matthias Peschke'
+branding:
+  icon: 'award'  
+  color: 'green'
+inputs:
+  source_dir:
+    description: 'Set the directory of the sources. Normally your github repository.'
+    required: true
+  option_filter:
+    description: 'Specify a filter for cmake options to process. For getting options like MYLIB_SOME_OPT, set filter to MYLIB. If empty, no filter is applied.'
+    required: false
+    default: ''
+  deploy_key:
+    description: 'Set a SSH private key from repository secret value for pushing to the remote branch.'
+    required: false
+  github_token:
+    description: 'Set a generated GITHUB_TOKEN for pushing to the remote branch.'
+    required: false
+  personal_token:
+    description: 'Set a personal access token for pushing to the remote branch.'
+    required: false
+  publish_branch:
+    description: 'Set a target branch for deployment.'
+    required: false
+    default: 'master'
+  allow_empty_commit:
+    description: 'If empty commits should be made to the publication branch'
+    required: false
+    default: 'false'
+  user_name:
+    description: 'Set Git user.name'
+    required: false
+  user_email:
+    description: 'Set Git user.email'
+    required: false
+  commit_message:
+    description: 'Set a custom commit message with a triggered commit hash'
+    required: false
+  full_commit_message:
+    description: 'Set a custom full commit message without a triggered commit hash'
+    required: false
+# runs:
+#   using: 'docker'
+#   image: 'Dockerfile'
+#   args:
+#     - ${{ inputs.option_filter }}
+runs:
+  using: 'composite'
+  steps:
+    - run: ${{ github.action_path }}/make_doc.py --filter ${{ inputs.option_filter }} --source-dir ${{ inputs.source_dir }}
+      shell: python
+    - uses: EndBug/add-and-commit@v8
+      with:
+        add: 'README.md'
+        message: 'Update cmake build options documentation.'
+      
