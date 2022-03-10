@@ -49,10 +49,15 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - run: ${{ github.action_path }}/make_doc.py --filter ${{ inputs.option_filter }} --source-dir ${{ inputs.source_dir }}
-      shell: python
+    - name: setup python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: execute py script
+      run: |
+        python ${{ github.action_path }}/make_doc.py --filter ${{ inputs.option_filter }} --source-dir ${{ inputs.source_dir }}
     - uses: EndBug/add-and-commit@v8
       with:
         add: 'README.md'
         message: 'Update cmake build options documentation.'
-      
+        cwd: ${{ inputs.source_dir }}
