@@ -56,6 +56,7 @@ runs:
     - name: execute py script
       run: |
         python ${{ github.action_path }}/make_doc.py --filter ${{ inputs.option_filter }} --source-dir ${{ inputs.source_dir }}
+      shell: bash
     - uses: EndBug/add-and-commit@v8
       with:
         add: 'README.md'
