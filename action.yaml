@@ -62,3 +62,5 @@ runs:
         add: 'README.md'
         message: 'Update cmake build options documentation.'
         cwd: ${{ inputs.source_dir }}
+        committer_name: GitHub Actions
+        committer_email: 41898282+github-actions[bot]@users.noreply.github.com
