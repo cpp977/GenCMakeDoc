@@ -12,40 +12,19 @@ inputs:
     description: 'Specify a filter for cmake options to process. For getting options like MYLIB_SOME_OPT, set filter to MYLIB. If empty, no filter is applied.'
     required: false
     default: ''
-  deploy_key:
-    description: 'Set a SSH private key from repository secret value for pushing to the remote branch.'
+  heading_marker:
+    description: 'Markdown specifier for the heading of the section which contains the documentation of cmake build options.'
     required: false
-  github_token:
-    description: 'Set a generated GITHUB_TOKEN for pushing to the remote branch.'
+    default: '#'
+  heading_title:
+    description: 'Title of the section which contains the documentation of cmake build options.'
     required: false
-  personal_token:
-    description: 'Set a personal access token for pushing to the remote branch.'
+    default: 'Build Options'
+  readme_name:
+    description: 'Filename of the README file relative to source_dir'
     required: false
-  publish_branch:
-    description: 'Set a target branch for deployment.'
-    required: false
-    default: 'master'
-  allow_empty_commit:
-    description: 'If empty commits should be made to the publication branch'
-    required: false
-    default: 'false'
-  user_name:
-    description: 'Set Git user.name'
-    required: false
-  user_email:
-    description: 'Set Git user.email'
-    required: false
-  commit_message:
-    description: 'Set a custom commit message with a triggered commit hash'
-    required: false
-  full_commit_message:
-    description: 'Set a custom full commit message without a triggered commit hash'
-    required: false
-# runs:
-#   using: 'docker'
-#   image: 'Dockerfile'
-#   args:
-#     - ${{ inputs.option_filter }}
+    default: 'README.md'
+
 runs:
   using: 'composite'
   steps:
@@ -55,12 +34,5 @@ runs:
         python-version: 3.9
     - name: execute py script
       run: |
-        python ${{ github.action_path }}/make_doc.py --filter ${{ inputs.option_filter }} --source-dir ${{ inputs.source_dir }}
+        python ${{ github.action_path }}/make_doc.py --filter ${{ inputs.option_filter }} --source-dir ${{ inputs.source_dir }} --heading-marker ${{ inputs.heading_marker }} --heading-title ${{ inputs.heading_title }} --README-name ${{ inputs.readme_name }}
       shell: bash
-    - uses: EndBug/add-and-commit@v8
-      with:
-        add: 'README.md'
-        message: 'Update cmake build options documentation.'
-        cwd: ${{ inputs.source_dir }}
-        committer_name: GitHub Actions
-        committer_email: 41898282+github-actions[bot]@users.noreply.github.com
