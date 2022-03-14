@@ -7,7 +7,7 @@ Usually, the cmake build can be controlled by several options which are passed t
 The options are specified in the `CMakeLists.txt` file using cmake's [option](https://cmake.org/cmake/help/latest/command/option.html) or cmake's [set](https://cmake.org/cmake/help/latest/command/set.html) as for example:
 ```
 option(MYLIB_BUILD_TESTS "Whether to build the tests for the project." OFF)
-option(MYLIB_SOME_OTHER_OPT "This control some other stuff." ON)
+option(MYLIB_SOME_OTHER_OPT "This controls some other stuff." ON)
 ```
 When these options are defined, the name, the default value and the description are already given.
 Documenting these options in the project's README would lead to duplication and superfluous work.
@@ -18,7 +18,7 @@ For the examples above, the table will look like this:
 | Option | Default | Description |
 | --- | --- | --- |
 | `MYLIB_BUILD_TESTS` | `OFF` | Whether to build the tests for the project. |
-| `MYLIB_SOME_OTHER_OPT` | `ON` | This control some other stuff. |
+| `MYLIB_SOME_OTHER_OPT` | `ON` | This controls some other stuff. |
 
 # Inputs
 ## `source_dir`
