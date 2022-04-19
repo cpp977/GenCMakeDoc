@@ -11,6 +11,7 @@ parser.add_argument('--outfile', type=str, default='cmake_doc.md', dest='outfile
 parser.add_argument('--heading-title', type=str, default='Build Options', dest='heading_title', help='Title of the section in the README file where the build options are in.')
 parser.add_argument('--heading-marker', type=str, default='#', dest='heading_marker', help='Markdown specifier for the heading. Normally #')
 parser.add_argument('--README-name', type=str, default='README.md', dest='README_name', help='Name of the README file relative to source-dir')
+parser.add_argument('--configure-opts', type=str, default='', dest='configure_opts', help='Options which are passed to the cmake configure command.')
 
 args = parser.parse_args()
 
@@ -30,7 +31,7 @@ class CMakeOption:
         return f"Option {self.name} with default={self.default}. Description={self.description}. Deduced category={self.category}."
     
 with tempfile.TemporaryDirectory() as tmpdirname:
-    process = subprocess.run(['cmake', '-LH', args.source_dir], capture_output=True, text=True, cwd=tmpdirname, check=True)
+    process = subprocess.run(['cmake', '-LH', args.source_dir]+args.configure_opts.split(' '), capture_output=True, text=True, cwd=tmpdirname, check=True)
     filtered = process.stdout[process.stdout.find("// "):]
     plain_options = filtered.split("\n\n")
     options = []

@@ -21,10 +21,14 @@ inputs:
     required: false
     default: 'Build Options'
   readme_name:
-    description: 'Filename of the README file relative to source_dir'
+    description: 'Filename of the README file relative to source_dir.'
     required: false
     default: 'README.md'
-
+  configure_opts:
+    description: 'Options which are passed to the cmake configure call. Format: <OPT1>=<VAL1> <OPT2>=<VAL2> ...'
+    required: false
+    default: ''
+    
 runs:
   using: 'composite'
   steps:
@@ -34,5 +38,5 @@ runs:
         python-version: 3.9
     - name: execute py script
       run: |
-        python ${{ github.action_path }}/make_doc.py --filter ${{ inputs.option_filter }} --source-dir ${{ inputs.source_dir }} --heading-marker "${{ inputs.heading_marker }}" --heading-title "${{ inputs.heading_title }}" --README-name "${{ inputs.readme_name }}"
+        python ${{ github.action_path }}/make_doc.py --filter ${{ inputs.option_filter }} --source-dir ${{ inputs.source_dir }} --heading-marker "${{ inputs.heading_marker }}" --heading-title "${{ inputs.heading_title }}" --README-name "${{ inputs.readme_name }}" --configure-opts "${{ inputs.configure_opts }}"
       shell: bash

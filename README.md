@@ -37,6 +37,9 @@ The action will replace the complete content in this section so that **only** th
 ## `readme_name`
 Filename of the README file relative to source_dir. Default: `"README.md"`
 
+## `configure_opts`
+Options which are passed to the cmake configure call. Format: <OPT1>=<VAL1> <OPT2>=<VAL2> ... Default: `""`
+
 # Notes
 Normally, the usage consists of three steps:
 - You have to checkout the repository first by using for example [actions/checkout](https://github.com/marketplace/actions/checkout).
