@@ -38,5 +38,5 @@ runs:
         python-version: 3.9
     - name: execute py script
       run: |
-        python ${{ github.action_path }}/make_doc.py --filter ${{ inputs.option_filter }} --source-dir ${{ inputs.source_dir }} --heading-marker '${{ inputs.heading_marker }}' --heading-title '${{ inputs.heading_title }}' --README-name '${{ inputs.readme_name }}' --configure-opts '${{ inputs.configure_opts }}'
+        python ${{ github.action_path }}/make_doc.py --filter=${{ inputs.option_filter }} --source-dir=${{ inputs.source_dir }} --heading-marker='${{ inputs.heading_marker }}' --heading-title='${{ inputs.heading_title }}' --README-name='${{ inputs.readme_name }}' --configure-opts='${{ inputs.configure_opts }}'
       shell: bash
