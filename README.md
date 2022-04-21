@@ -54,7 +54,7 @@ uses: actions/checkout@v3
 
 #Optionally install dependencies for the project so that cmake's configure step will run successfully.
 
-uses: cpp977/GenCMakeDoc@v0
+uses: cpp977/GenCMakeDoc@v1
 with:
     source_dir: $GITHUB_WORKSPACE
     option_filter: MYLIB
