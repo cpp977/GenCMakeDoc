@@ -11,7 +11,7 @@ option(MYLIB_SOME_OTHER_OPT "This controls some other stuff." ON)
 ```
 When these options are defined, the name, the default value and the description are already given.
 Documenting these options in the project's README would lead to duplication and superfluous work.
-This action will scan the `CMakeLists.txt` of the project using `cmake -LH` and generate a markdown table of all options containing the name, the default value and the description.
+This action will scan the `CMakeLists.txt` of the project using `cmake -LH -N` and generate a markdown table of all options containing the name, the default value and the description.
 Then the action puts this table directly to the project's README site in a specified section.
 For the examples above, the table will look like this:
 
@@ -45,8 +45,6 @@ Normally, the usage consists of three steps:
 - You have to checkout the repository first by using for example [actions/checkout](https://github.com/marketplace/actions/checkout).
 - The you can generate the cmake options documentation with this action.
 - Finally, you have to commit and push the changes. Here, you can use [EndBug/add-and-commit](https://github.com/marketplace/actions/add-commit).
-
-You must ensure that the configure step of the `cmake` command does succeed. Possible dependencies need to be installed.
 
 # Example usage
 ```

@@ -31,7 +31,7 @@ class CMakeOption:
         return f"Option {self.name} with default={self.default}. Description={self.description}. Deduced category={self.category}."
     
 with tempfile.TemporaryDirectory() as tmpdirname:
-    process = subprocess.run(['cmake', '-LH', args.source_dir]+args.configure_opts.split(' '), capture_output=True, text=True, cwd=tmpdirname, check=True)
+    process = subprocess.run(['cmake', '-LH', '-N', args.source_dir]+args.configure_opts.split(' '), capture_output=True, text=True, cwd=tmpdirname, check=True)
     filtered = process.stdout[process.stdout.find("// "):]
     plain_options = filtered.split("\n\n")
     options = []
